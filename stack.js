@@ -33,15 +33,25 @@ class Stack {
   }
 }
 
-const stack = new Stack();
+function divideBy2(decNumber) {
+  const remainderStack = new Stack();
+  let remainder;
+  const result = [];
 
-console.log(stack.isEmpty());
-stack.push(5);
-stack.push(8);
-stack.push(10);
-stack.push(52);
-stack.print();
-stack.pop();
-console.log(stack.peek());
-console.log(stack.size());
-// stack.clear();
+  while (decNumber > 0) {
+    remainder = Math.floor(decNumber % 2);
+    remainderStack.push(remainder);
+    decNumber = Math.floor(decNumber / 2);
+  }
+
+  const len = remainderStack.size();
+  for (let i = 0; i < len; i++) {
+    result.push(remainderStack.pop());
+  }
+
+  return result.toString();
+}
+
+console.log(divideBy2(10));
+console.log(divideBy2(233));
+console.log(divideBy2(1000));
