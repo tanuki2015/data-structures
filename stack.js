@@ -12,6 +12,7 @@ class Stack {
   }
 
   peek() {
+    // 返回栈顶元素，最后进入的一个
     const length = this.items.length;
     return this.items[length - 1];
   }
