@@ -74,12 +74,41 @@ class PriorityQueue extends Queue {
 }
 
 const pQueue = new PriorityQueue();
-pQueue.enqueue(a);
-pQueue.enqueue(b);
-pQueue.enqueue(c);
-pQueue.enqueue(d);
-pQueue.print();
-pQueue.dequeue();
-pQueue.print();
-pQueue.dequeue();
-pQueue.print();
+// pQueue.enqueue(a);
+// pQueue.enqueue(b);
+// pQueue.enqueue(c);
+// pQueue.enqueue(d);
+// pQueue.print();
+// pQueue.dequeue();
+// pQueue.print();
+// pQueue.dequeue();
+// pQueue.print();
+
+// 循环队列， 击鼓传花游戏
+function hotPotato(times, people) {
+  const queue = new Queue();
+
+  people.forEach(person => {
+    queue.enqueue(person);
+  });
+
+  function playOneTime() {
+    let count = times;
+    while (count > 0) {
+      const person = queue.dequeue();
+      // console.log(`${person} 传出花`);
+      queue.enqueue(person);
+      count--;
+    }
+    const loser = queue.dequeue();
+    console.log(`${loser} 出局`);
+    return loser;
+  }
+
+  for (let i = 0, len = queue.size() - 1; i < len; i++) {
+    playOneTime();
+  }
+  console.log(`the winner is ${queue.dequeue()}`);
+}
+
+hotPotato(77, ['nicolas', 'aimy', 'Camila', 'carl', 'jack']);
