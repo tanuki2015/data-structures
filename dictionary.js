@@ -60,3 +60,14 @@ const dictionary = new Dictionary();
 dictionary.set('Gandalf', 'gandalf@email.com');
 dictionary.set('John', 'johnsnow@email.com');
 dictionary.set('Tyrion', 'tyrion@email.com');
+
+const obj1 = {x: 1};
+const obj2 = {y: 2};
+const obj3 = {x: 5, z:[8,9,10],};
+const objRsult = Object.assign(obj1, obj2, obj3);
+
+const set1 = new Set([1,2,3,'a','b','c']);
+const set2 = new Set([1,2,'a','b','e']);
+
+const arr1 = [...set1];
+const unionSet = arr1.map(item => set2.has(item));

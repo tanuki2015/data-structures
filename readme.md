@@ -26,6 +26,79 @@
 
 后面的字典可以解决这个问题。
 
+#### 顺带学习一下es6中的set
+找了好多中文资料对es6中的set都讲的不太清晰，只能看nicolla的《understanding es6》，确实讲的好。
+
+set和map在es6中出现的原因，因为es5没有set和map，于是大家用object来模拟。
+```
+// 用一个空对象所以要Object.create(null)
+// 如果用字面量obj = {}, 会继承Object的原型上的方法。
+
+let set = Object.create(null);
+set.loaded = true;
+if (set.loaded) {
+  //do something ...
+}
+```
+
+用map则是为了检索值，除此外跟set区别不大。
+
+他们的问题是存储的时候不分类型，存number 8 后，再存string 8 就会覆盖前面的值。
+
+而如果key是一个对象，则会被转换成字符串[object Object]，再存对象也会覆盖前面的值.
+
+你以为有两个对象，其实只有一个：
+```
+key1 = {},
+key2 = {};
+
+map[key1] = "foo";
+
+console.log(map[key2]);     // "foo"
+```
+
+为了解决这些问题，有了set和map。
+
+#### set的目的是用一个不重复的list管理离散的value。
+1. 不重复的value，并且set内部有类型区分，同时存入number 8 和 string 8， 或两个空对象都没问题。
+```
+let set = new Set();
+set.add(5);
+set.add("5");
+
+console.log(set.size);    // 2
+
+let set = new Set(),
+    key1 = {},
+    key2 = {};
+
+set.add(key1);
+set.add(key2);
+
+console.log(set.size);    // 2
+```
+2. 访问set的时候用set的forEach迭代访问，也可以转换成数组后直接用下标访问。
+
+#### weakSet
+1. 只能存储对象。
+2. 在对象没有其他引用的时候回自动交给垃圾处理机制，不会有内存泄漏问题。这是weakSet的最大用处。
+```
+let set = new WeakSet(),
+    key = {};
+
+// add the object to the set
+set.add(key);
+
+console.log(set.has(key));      // true
+
+// remove the last strong reference to key, also removes from weak set
+key = null;
+
+// set中再没有任何内容
+```
+
+
+
 ### Dictionary
 
 以 key-value 的形式存储。
