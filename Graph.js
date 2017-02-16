@@ -1,3 +1,8 @@
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    console.log('readyState is ok!');
+  }
+};
 // 需要用到字典，使用import需要编译，为了直接能在浏览器运行，就拷贝过来用。
 class Dictionary {
   constructor() {
@@ -80,7 +85,7 @@ class Graph {
       const vertice = item;
       const Edges = this.adjList.get(item).toString();
       console.log(`${vertice} -> ${Edges}`);
-    })
+    });
   }
 }
 
@@ -103,3 +108,4 @@ graph.addEdge('B', 'F');
 graph.addEdge('E', 'I');
 
 graph.toString();
+console.log('graph done!')
